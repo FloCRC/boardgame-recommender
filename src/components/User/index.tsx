@@ -32,19 +32,20 @@ type Props = {
 
 function User({ username }: Props) {
 
-
     const [userGamesPlayed, setUserGamesPlayed] = useState<Array<Game>>([])
+
     useEffect(() => {
         fetch(`https://bgg-json.azurewebsites.net/collection/${username}`)
             .then(res => {
                 return res.json()
             })
             .then(data => {
+                let array = []
                 for (let key in data) {
-                    setUserGamesPlayed((prevArray: Array<any>) => [...prevArray, data[key]])
+                    array.push(data[key])
                 }
+                setUserGamesPlayed(array)
             })
-        console.log(userGamesPlayed)
     }, [])
 
     return (
@@ -54,8 +55,9 @@ function User({ username }: Props) {
             <div className="grid grid-cols-5 m-2">
                 {userGamesPlayed.map((game: any) => {
                     return (
-                        <div key={game.gameId}>
+                        <div key={game.gameId} className="m-1 p-1 border flex flex-col items-center">
                             <p>{game.name}</p>
+                            <p>User Rating: {game.rating}/10</p>
                             <a href={`https://boardgamegeek.com/boardgame/${game.gameId}`} target="_blank"><img src={game.image} className="max-w-40 max-h-40" /></a>
                         </div>
                     )

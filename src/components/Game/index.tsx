@@ -6,7 +6,7 @@ type Props = {
 
 function Game({ id }: Props) {
 
-    const [game, setGame]: any = useState('')
+    const [game, setGame] = useState<any>('')
 
     useEffect(() => {
         fetch(`https://bgg-json.azurewebsites.net/thing/${id}`)
