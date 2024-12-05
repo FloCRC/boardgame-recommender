@@ -25,7 +25,6 @@ function Game() {
     }
 
     const { gameId } = useParams()
-    console.log(gameId)
 
     const [game, setGame] = useState<Game>({
         artists: ["Bruce Brenneise", "Jose David Lanza Cebrian", "Anailis Dorta"],
@@ -59,7 +58,6 @@ function Game() {
             })
             .then(data => {
                 setGame(data)
-                console.log(data)
             })
     }, [])
 
