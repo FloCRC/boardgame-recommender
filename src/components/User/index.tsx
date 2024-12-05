@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link, useParams } from "react-router-dom"
 
 interface Game {
     averageRating: number,
@@ -26,11 +27,9 @@ interface Game {
     yearPublished: number
 }
 
-type Props = {
-    username: string
-}
+function User() {
 
-function User({ username }: Props) {
+    const { username } = useParams()
 
     const [userGamesPlayed, setUserGamesPlayed] = useState<Array<Game>>([])
 
@@ -58,7 +57,8 @@ function User({ username }: Props) {
                         <div key={game.gameId} className="m-1 p-1 border flex flex-col items-center">
                             <p>{game.name}</p>
                             <p>User Rating: {game.rating}/10</p>
-                            <a href={`https://boardgamegeek.com/boardgame/${game.gameId}`} target="_blank"><img src={game.image} className="max-w-40 max-h-40" /></a>
+                            <Link to={`/game/${game.gameId}`}><img src={game.image} className="max-w-40 max-h-40" /></Link>
+                            <a href={`https://boardgamegeek.com/boardgame/${game.gameId}`} target="_blank">BoardGameGeek Entry</a>
                         </div>
                     )
                 })}

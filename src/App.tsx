@@ -10,8 +10,8 @@ function App() {
             <Link to="/"><h1 className="text-lg">Boardgames</h1></Link>
             <Routes>
                 <Route path="/" element={<Home />}></Route>
-                <Route path="/game" element={<Game id="31260" />}></Route>
-                <Route path="/user" element={<User username="mooseface" />}></Route>
+                <Route path="/game/:gameId" element={<Game />}></Route>
+                <Route path="/user/:username" element={<User />}></Route>
             </Routes>
         </BrowserRouter>
     )
