@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
 
-function Game() {
+type Props = {
+    id: string
+}
+
+function Game({ id }: Props) {
 
     interface Game {
         artists: Array<string>,
@@ -23,8 +26,6 @@ function Game() {
         thumbnail: string,
         yearPublished: number
     }
-
-    const { gameId } = useParams()
 
     const [game, setGame] = useState<Game>({
         artists: ["Bruce Brenneise", "Jose David Lanza Cebrian", "Anailis Dorta"],
@@ -52,17 +53,21 @@ function Game() {
     })
 
     useEffect(() => {
-        fetch(`https://bgg-json.azurewebsites.net/thing/${gameId}`)
+        fetch(`https://bgg-json.azurewebsites.net/thing/${id}`)
             .then(res => {
                 return res.json()
             })
             .then(data => {
                 setGame(data)
+                console.log(data)
             })
     }, [])
 
+    console.log(game) 
+
     return (
         <div>
+            <p>Hello</p>
             <h3 className="">{game.name}</h3>
             <p>Players: {game.minPlayers} - {game.maxPlayers}</p>
             <img src={game.image} alt="Image of Game Box" className="w-24 h-24" />
