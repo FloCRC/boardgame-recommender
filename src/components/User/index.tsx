@@ -1,35 +1,37 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 
-interface Game {
-    averageRating: number,
-    bggRating: number,
-    forTrade: boolean,
-    gameId: number,
-    image: string,
-    isExpansion: boolean,
-    maxPlayers: number,
-    minPlayers: number,
-    name: string,
-    numPlays: number,
-    owned: boolean,
-    playingTime: number,
-    preOrdered: boolean,
-    previousOwned: boolean,
-    rank: number,
-    rating: number,
-    thumbnail: string,
-    userComment: string,
-    want: boolean,
-    wantToBuy: boolean,
-    wantToPlay: boolean,
-    wishlist: boolean,
-    yearPublished: number
+type Props = {
+    username: string
 }
 
-function User() {
+function User({ username }: Props) {
 
-    const { username } = useParams()
+    interface Game {
+        averageRating: number,
+        bggRating: number,
+        forTrade: boolean,
+        gameId: number,
+        image: string,
+        isExpansion: boolean,
+        maxPlayers: number,
+        minPlayers: number,
+        name: string,
+        numPlays: number,
+        owned: boolean,
+        playingTime: number,
+        preOrdered: boolean,
+        previousOwned: boolean,
+        rank: number,
+        rating: number,
+        thumbnail: string,
+        userComment: string,
+        want: boolean,
+        wantToBuy: boolean,
+        wantToPlay: boolean,
+        wishlist: boolean,
+        yearPublished: number
+    }
 
     const [userGamesPlayed, setUserGamesPlayed] = useState<Array<Game>>([])
 
@@ -54,7 +56,7 @@ function User() {
             <div className="grid grid-cols-5 m-2">
                 {userGamesPlayed.map((game: any) => {
                     return (
-                        <div key={game.gameId} className="m-1 p-1 border flex flex-col items-center">
+                        <div key={game.image} className="m-1 p-1 border flex flex-col items-center">
                             <p>{game.name}</p>
                             <p>User Rating: {game.rating}/10</p>
                             <Link to={`/game/${game.gameId}`}><img src={game.image} className="max-w-40 max-h-40" /></Link>

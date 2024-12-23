@@ -1,20 +1,31 @@
 import { FormEvent, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Game from "../Game"
+import User from "../User"
 
 function Home() {
 
     const [gameSearchInput, setGameSearchInput] = useState<string>('')
     const [gameSearchResult, setGameSearchResult] = useState<Array<string>>([])
-    // const [userSearchResult, setUserSearchResult] = useState('')
+    const [userSearchInput, setUserSearchInput] = useState<string>('')
+    const [userSearchResult, setUserSearchResult] = useState<string>('cattriona')
 
     function gameSearchSubmit(e: FormEvent) {
         e.preventDefault()
         const target = e.target as typeof e.target & {
             gameSearch: { value: string }
         }
-        const gameSearchInput = target.gameSearch.value
-        setGameSearchInput(gameSearchInput)
+        const searchInput = target.gameSearch.value
+        setGameSearchInput(searchInput)
+    }
+
+    function userSearchSubmit(e: FormEvent) {
+        e.preventDefault()
+        const target = e.target as typeof e.target & {
+            userSearch: { value: string }
+        }
+        const searchInput = target.userSearch.value
+        setUserSearchInput(searchInput)
     }
 
     useEffect(() => {
@@ -22,10 +33,7 @@ function Home() {
         if (gameSearchInput != '') {
             gameSearchUrl += gameSearchInput
         }
-        else {
-            gameSearchUrl += 'harmonies'
-        }
-        fetch(`https://www.boardgamegeek.com/xmlapi2/search?query=${gameSearchInput}`)
+        fetch(`${gameSearchUrl}`)
             .then(res => {
                 return res.text()
             })
@@ -44,12 +52,24 @@ function Home() {
                 if (gamesArray.length > 0) {
                     setGameSearchResult(gamesArray)
                 }
-                console.log(gamesArray)
-
             })
-    }, [setGameSearchResult]) 
 
-    console.log(gameSearchResult)
+        let userSearchUrl = `https://www.boardgamegeek.com/xmlapi2/user?name=`
+        if (userSearchInput != '') {
+            userSearchUrl += userSearchInput
+        }
+        setUserSearchResult(userSearchInput)
+        fetch(`${userSearchUrl}`)
+            .then(res => {
+                return res.text()
+            })
+            .then(data => {
+                console.log(data)
+                const parser = new DOMParser()
+                const xmlDoc = parser.parseFromString(data, "text/xml")
+                const nodes: any = xmlDoc.documentElement.childNodes;
+            })
+    }, [setGameSearchResult, setUserSearchResult])
 
     return (
         <div>
@@ -60,18 +80,18 @@ function Home() {
                 <button type="submit">Search Game</button>
             </form>
             <div>
-                <Game id="173346" />
                 {gameSearchResult.map((game: any) => {
                     return (
                         <Game key={game} id={game} />
                     )
                 })}
             </div>
-            {/* <form>
+            <form onSubmit={userSearchSubmit}>
                 <label htmlFor="userSearch">Search for a user:</label>
-                <input onChange={userSearchInput} name="userSearch" id="userSearch" type="text" placeholder="Search user..."></input>
-                <Link to="/user"><p>Search User</p></Link>
-            </form> */}
+                <input name="userSearch" id="userSearch" type="text" placeholder="Search user..."></input>
+                <button type="submit">Search User</button>
+            </form>
+                <User username={userSearchResult} />
         </div >
     )
 }
