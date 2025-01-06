@@ -6,12 +6,14 @@ import Home from "./components/Home";
 function App() {
 
     return (
-        <BrowserRouter>
-            <Link to="/"><h1 className="text-lg">Boardgames</h1></Link>
-            <Routes>
-                <Route path="/" element={<Home />}></Route>
-            </Routes>
-        </BrowserRouter>
+        <div className="p-2 bg-gray-400">
+            <BrowserRouter>
+                <Link to="/"><h1 className="text-lg">Boardgames</h1></Link>
+                <Routes>
+                    <Route path="/" element={<Home />}></Route>
+                </Routes>
+            </BrowserRouter>
+        </div>
     )
 }
 

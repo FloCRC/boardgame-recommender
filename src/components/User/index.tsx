@@ -56,10 +56,10 @@ function User({ username }: Props) {
             <div className="grid grid-cols-5 m-2">
                 {userGamesPlayed.map((game: any) => {
                     return (
-                        <div key={game.image} className="m-1 p-1 border flex flex-col items-center">
+                        <div key={game.image} className="m-1 p-1 border flex flex-col items-center bg-gray-300">
                             <p>{game.name}</p>
                             <p>User Rating: {game.rating}/10</p>
-                            <Link to={`/game/${game.gameId}`}><img src={game.image} className="max-w-40 max-h-40" /></Link>
+                            <img src={game.image} className="max-w-40 max-h-40" />
                             <a href={`https://boardgamegeek.com/boardgame/${game.gameId}`} target="_blank">BoardGameGeek Entry</a>
                         </div>
                     )

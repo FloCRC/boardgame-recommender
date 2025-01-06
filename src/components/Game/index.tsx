@@ -34,12 +34,12 @@ function Game({ id }: Props) {
         description: "Slay the Spire: The Board Game is a co-operative deck-building adventure. Craft a unique deck, encounter bizarre creatures, discover relics of immense power, and finally become strong enough to slay the Spire! Slay the Spire: The Board Game, (core edition) includes: -4 Minis, -Over 730 cards, -Over 450 Art Sleeves, -2 Map Boards, -1 Merchant Board, -4 Player Boards, -1 Die, -50 plastic cubes, -Over 113 tokens, Collector's edition: 4x (3mm neoprene) playermats, 1x deck playmat, Bigger box (fits mats), 1x Merchant bag, Metal coins, Kickstarter exclusives and Stretch goals: 1x Merchant pat, Claw die, 8x Claw cards, 28x Foil Cards, 3x Acrylic heart tokens, More details on Kickstarter http://kck.st/3NrGwS5&",
         designers: ["Gary Dworetsky", "Anthony Giovannetti", "Casey Yano"],
         gameId: 338960,
-        image: "https://cf.geekdo-images.com/PQzVclEoOQ_wr4e1V86kxA__original/img/KXOf1hP1cIJQLabKhZulWP-e9wI=/0x0/filters:format(png)/pic8157856.png",
+        image: "-",
         isExpansion: false,
-        maxPlayers: 4,
+        maxPlayers: 0,
         mechanics: ["Cooperative Game", "Deck, Bag, and Pool Building", "Dice Rolling", "Hand Management", "Solo / Solitaire Game"],
-        minPlayers: 1,
-        name: "Slay the Spire: The Board Game",
+        minPlayers: 0,
+        name: "Game data not found.",
         playerPollResults: [{ best: 26, notRecommended: 17, numPlayers: 1, numPlayersIsAndHigher: false, recommended: 76 },
         { best: 95, notRecommended: 3, numPlayers: 2, numPlayersIsAndHigher: false, recommended: 29 },
         { best: 41, notRecommended: 10, numPlayers: 3, numPlayersIsAndHigher: false, recommended: 66 },
@@ -58,17 +58,19 @@ function Game({ id }: Props) {
                 return res.json()
             })
             .then(data => {
-                setGame(data)
+                if (data.message != 'An error has occurred.') {
+                    setGame(data)
+                }
             })
     }, [])
 
     return (
-        <div>
-            <p>Game Search Results:</p>
+        <>
             <h3 className="">{game.name}</h3>
             <p>Players: {game.minPlayers} - {game.maxPlayers}</p>
-            <img src={game.image} alt="Image of Game Box" className="w-24 h-24" />
-        </div >
+            <img src={game.image} alt="Image of Game Box" className="max-h-40 max-w-40" />
+            <a href={`https://boardgamegeek.com/boardgame/${game.gameId}`} target="_blank">BoardGameGeek Entry</a>
+        </>
     )
 }
 
