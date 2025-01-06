@@ -47,7 +47,7 @@ function User({ username }: Props) {
                 }
                 setUserGamesPlayed(array)
             })
-    }, [])
+    }, [userGamesPlayed])
 
     return (
         <div>

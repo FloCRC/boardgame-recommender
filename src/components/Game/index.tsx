@@ -59,15 +59,12 @@ function Game({ id }: Props) {
             })
             .then(data => {
                 setGame(data)
-                console.log(data)
             })
     }, [])
 
-    console.log(game) 
-
     return (
         <div>
-            <p>Hello</p>
+            <p>Game Search Results:</p>
             <h3 className="">{game.name}</h3>
             <p>Players: {game.minPlayers} - {game.maxPlayers}</p>
             <img src={game.image} alt="Image of Game Box" className="w-24 h-24" />

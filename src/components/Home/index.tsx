@@ -32,44 +32,31 @@ function Home() {
         let gameSearchUrl = `https://www.boardgamegeek.com/xmlapi2/search?query=`
         if (gameSearchInput != '') {
             gameSearchUrl += gameSearchInput
-        }
-        fetch(`${gameSearchUrl}`)
-            .then(res => {
-                return res.text()
-            })
-            .then(data => {
-                const parser = new DOMParser()
-                const xmlDoc = parser.parseFromString(data, "text/xml")
-                const gamesArray = []
-                const nodes: any = xmlDoc.documentElement.childNodes;
-
-                for (let i = 0; i < nodes.length; i++) {
-                    const node = nodes[i];
-                    if (node.nodeType == 1) {
-                        gamesArray.push(node.id);
+            fetch(`${gameSearchUrl}`)
+                .then(res => {
+                    return res.text()
+                })
+                .then(data => {
+                    const parser = new DOMParser()
+                    const xmlDoc = parser.parseFromString(data, "text/xml")
+                    const gamesArray = []
+                    const nodes: any = xmlDoc.documentElement.childNodes;
+                    for (let i = 0; i < nodes.length; i++) {
+                        const node = nodes[i];
+                        if (node.nodeType == 1) {
+                            gamesArray.push(node.id);
+                        }
                     }
-                }
-                if (gamesArray.length > 0) {
-                    setGameSearchResult(gamesArray)
-                }
-            })
-
-        let userSearchUrl = `https://www.boardgamegeek.com/xmlapi2/user?name=`
-        if (userSearchInput != '') {
-            userSearchUrl += userSearchInput
+                    if (gamesArray.length > 0) {
+                        setGameSearchResult(gamesArray)
+                    }
+                })
         }
-        setUserSearchResult(userSearchInput)
-        fetch(`${userSearchUrl}`)
-            .then(res => {
-                return res.text()
-            })
-            .then(data => {
-                console.log(data)
-                const parser = new DOMParser()
-                const xmlDoc = parser.parseFromString(data, "text/xml")
-                const nodes: any = xmlDoc.documentElement.childNodes;
-            })
-    }, [setGameSearchResult, setUserSearchResult])
+        if (userSearchInput != '') {
+            setUserSearchResult(userSearchInput)
+            console.log(userSearchResult)
+        }
+    }, [gameSearchInput, userSearchInput])
 
     return (
         <div>
@@ -91,7 +78,7 @@ function Home() {
                 <input name="userSearch" id="userSearch" type="text" placeholder="Search user..."></input>
                 <button type="submit">Search User</button>
             </form>
-                <User username={userSearchResult} />
+            <User username={userSearchResult} />
         </div >
     )
 }
