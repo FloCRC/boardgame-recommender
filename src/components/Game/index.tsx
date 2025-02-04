@@ -1,3 +1,4 @@
+import { Button, Card, Center, Image, Link } from "@chakra-ui/react"
 import { useState, useEffect } from "react"
 
 type Props = {
@@ -66,10 +67,13 @@ function Game({ id }: Props) {
 
     return (
         <>
-            <h3 className="">{game.name}</h3>
-            <p>Players: {game.minPlayers} - {game.maxPlayers}</p>
-            <img src={game.image} alt="Image of Game Box" className="max-h-40 max-w-40" />
-            <a href={`https://boardgamegeek.com/boardgame/${game.gameId}`} target="_blank">BoardGameGeek Entry</a>
+            <Card.Root maxW="sm" overflow="hidden" key={game.gameId} className="m-2 p-2">
+                <Center><Image src={game.image} alt="Boardgame Box Art" className="max-w-40 max-h-40" fit="contain" /></Center>
+                <Card.Body gap="2">
+                    <Center><Card.Title>{game.name}</Card.Title></Center>
+                </Card.Body>
+                <Link href={`https://boardgamegeek.com/boardgame/${game.gameId}`} className="flex justify-end" target="blank"><Button colorPalette={"cyan"} variant="surface" className="p-2">BGG Entry</Button></Link>
+            </Card.Root>
         </>
     )
 }

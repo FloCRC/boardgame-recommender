@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Game from "../Game"
 import User from "../User"
+import { Button, ButtonGroup } from "@chakra-ui/react"
 
 function Home() {
 
@@ -66,22 +67,20 @@ function Home() {
             <form onSubmit={gameSearchSubmit}>
                 <label htmlFor="gameSearch">Search for a game:</label>
                 <input name="gameSearch" id="gameSearch" type="text" placeholder="Search game..." className="ml-1"></input>
-                <button type="submit" className="ml-1 p-1 border border-white rounded hover:bg-white hover:shadow-inner">Search Game</button>
+                <Button type="submit" colorPalette={"cyan"} variant={"surface"} className="p-2">Search Game</Button>
             </form>
             {gameSearchResult.length < 1 ? <h1>No Games found</h1> : <h1>Game Search Results:</h1>}
             <div className="grid grid-cols-5 m-2">
                 {gameSearchResult.map((game: any) => {
                     return (
-                        <div className="m-1 p-1 border flex flex-col items-center bg-gray-300">
-                            <Game key={game} id={game} />
-                        </div>
+                        <Game key={game} id={game} />
                     )
                 })}
             </div>
             <form onSubmit={userSearchSubmit}>
                 <label htmlFor="userSearch">Search for a user:</label>
                 <input name="userSearch" id="userSearch" type="text" placeholder="Search user..." className="ml-1"></input>
-                <button type="submit" className="ml-1 p-1 border border-white rounded hover:bg-white hover:shadow-inner">Search User</button>
+                <Button type="submit" colorPalette={"cyan"} variant={"surface"} className="p-2">Search User</Button>
             </form>
             <User username={userSearchResult} />
         </div >

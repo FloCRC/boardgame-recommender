@@ -1,5 +1,5 @@
+import { Button, Card, Center, Image, Link, Text } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
 
 type Props = {
     username: string
@@ -47,7 +47,7 @@ function User({ username }: Props) {
                 }
                 setUserGamesPlayed(array)
             })
-    }, [userGamesPlayed])
+    }, [username])
 
     return (
         <div>
@@ -56,12 +56,13 @@ function User({ username }: Props) {
             <div className="grid grid-cols-5 m-2">
                 {userGamesPlayed.map((game: any) => {
                     return (
-                        <div key={game.image} className="m-1 p-1 border flex flex-col items-center bg-gray-300">
-                            <p>{game.name}</p>
-                            <p>User Rating: {game.rating}/10</p>
-                            <img src={game.image} className="max-w-40 max-h-40" />
-                            <a href={`https://boardgamegeek.com/boardgame/${game.gameId}`} target="_blank">BoardGameGeek Entry</a>
-                        </div>
+                        <Card.Root maxW="sm" overflow="hidden" key={game.gameId} className="m-2 p-2">
+                            <Center><Image src={game.image} alt="Boardgame Box Art" className="max-w-40 max-h-40" fit="contain" /></Center>
+                            <Card.Body gap="2">
+                                <Center><Card.Title>{game.name}</Card.Title></Center>
+                            </Card.Body>
+                            <Link href={`https://boardgamegeek.com/boardgame/${game.gameId}`} className="flex justify-end" target="blank"><Button colorPalette={"cyan"} variant="surface" className="p-2">BGG Entry</Button></Link>
+                        </Card.Root>
                     )
                 })}
             </div>
