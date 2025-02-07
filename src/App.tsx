@@ -1,8 +1,12 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import { Provider } from "./components/ui/provider";
+import { useColorMode } from "./components/ui/color-mode"
+import { Button } from "@chakra-ui/react";
 
 function App() {
+
+    const { toggleColorMode } = useColorMode()
 
     return (
         <Provider>

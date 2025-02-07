@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Game from "../Game"
 import User from "../User"
-import { Button, ButtonGroup } from "@chakra-ui/react"
+import { Button } from "@chakra-ui/react"
 
 function Home() {
 
@@ -63,7 +63,6 @@ function Home() {
 
     return (
         <div className="m-2">
-            <Link to="/"><p className="">Home</p></Link>
             <form onSubmit={gameSearchSubmit}>
                 <label htmlFor="gameSearch">Search for a game:</label>
                 <input name="gameSearch" id="gameSearch" type="text" placeholder="Search game..." className="ml-1"></input>
