@@ -67,12 +67,12 @@ function Game({ id }: Props) {
 
     return (
         <>
-            <Card.Root maxW="sm" overflow="hidden" key={game.gameId} className="m-2 p-2">
+            <Card.Root maxW="sm" overflow="hidden" key={game.gameId} className="m-2 p-2 bg-gray-700 shadow-lg">
                 <Center><Image src={game.image} alt="Boardgame Box Art" className="max-w-40 max-h-40" fit="contain" /></Center>
                 <Card.Body gap="2">
                     <Center><Card.Title>{game.name}</Card.Title></Center>
                 </Card.Body>
-                <Link href={`https://boardgamegeek.com/boardgame/${game.gameId}`} className="flex justify-end" target="blank"><Button colorPalette={"cyan"} variant="surface" className="p-2">BGG Entry</Button></Link>
+                <Link href={`https://boardgamegeek.com/boardgame/${game.gameId}`} className="flex justify-end" target="blank"><Button variant="surface" className="p-2 bg-blue-300 text-gray-700 hover:bg-blue-200 hover:shadow">BGG Entry</Button></Link>
             </Card.Root>
         </>
     )

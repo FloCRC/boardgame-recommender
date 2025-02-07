@@ -1,5 +1,4 @@
 import { FormEvent, useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 import Game from "../Game"
 import User from "../User"
 import { Button } from "@chakra-ui/react"
@@ -63,22 +62,24 @@ function Home() {
 
     return (
         <div className="m-2">
-            <form onSubmit={gameSearchSubmit}>
-                <label htmlFor="gameSearch">Search for a game:</label>
-                <input name="gameSearch" id="gameSearch" type="text" placeholder="Search game..." className="ml-1"></input>
-                <Button type="submit" colorPalette={"cyan"} variant={"surface"} className="p-2">Search Game</Button>
-            </form>
-            {gameSearchResult.length < 1 ? <h1>No Games found</h1> : <h1>Game Search Results:</h1>}
-            <div className="grid grid-cols-5 m-2">
-                {gameSearchResult.map((game: any) => {
-                    return (
-                        <Game key={game} id={game} />
-                    )
-                })}
+            <div className="border-b mb-2">
+                <form onSubmit={gameSearchSubmit}>
+                    <label htmlFor="gameSearch">Search for a game:</label>
+                    <input name="gameSearch" id="gameSearch" type="text" placeholder="Search game..." className="ml-1 p-1"></input>
+                    <Button type="submit" colorPalette={"cyan"} variant={"surface"} className="p-2">Search Game</Button>
+                </form>
+                {gameSearchResult.length < 1 ? <h1>No Games found</h1> : <h1>Game Search Results:</h1>}
+                <div className="grid grid-cols-5 m-2">
+                    {gameSearchResult.map((game: any) => {
+                        return (
+                            <Game key={game} id={game} />
+                        )
+                    })}
+                </div>
             </div>
             <form onSubmit={userSearchSubmit}>
                 <label htmlFor="userSearch">Search for a user:</label>
-                <input name="userSearch" id="userSearch" type="text" placeholder="Search user..." className="ml-1"></input>
+                <input name="userSearch" id="userSearch" type="text" placeholder="Search user..." className="ml-1 p-1"></input>
                 <Button type="submit" colorPalette={"cyan"} variant={"surface"} className="p-2">Search User</Button>
             </form>
             <User username={userSearchResult} />

@@ -1,18 +1,16 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import { Provider } from "./components/ui/provider";
-import { useColorMode } from "./components/ui/color-mode"
-import { Button } from "@chakra-ui/react";
 
 function App() {
 
-    const { toggleColorMode } = useColorMode()
-
     return (
         <Provider>
-            <div className="p-2">
+            <div className="bg-gray-500 shadow">
                 <BrowserRouter>
-                    <Link to="/"><h1 className="text-lg">Boardgames</h1></Link>
+                    <header className="p-2 border-b bg-blue-300 text-gray-700 font-bold">
+                        <Link to="/"><h1 className="text-lg">Boardgames</h1></Link>
+                    </header>
                     <Routes>
                         <Route path="/" element={<Home />}></Route>
                     </Routes>
